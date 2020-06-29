@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'session/home'
   root "session#home"
   resources :items
   resources :orders
