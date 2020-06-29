@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2020_06_29_211345) do
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
     t.decimal "total_price", precision: 8, scale: 2
-    t.boolean "approved"
+    t.boolean "approved", default: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_06_29_211345) do
     t.string "name"
     t.string "username"
     t.string "email"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
