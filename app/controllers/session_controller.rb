@@ -5,6 +5,7 @@ class SessionController < ApplicationController
     
 
 	def oauth_login
+		byebug
         user = User.find_or_create_by(email: auth.email)
         if !user.password_digest
             user.password = SecureRandom.hex
