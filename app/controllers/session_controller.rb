@@ -4,7 +4,7 @@ class SessionController < ApplicationController
     end
     
 
-    def oauth_login
+	def oauth_login
         user = User.find_or_create_by(email: auth.email)
         if !user.password_digest
             user.password = SecureRandom.hex
@@ -12,7 +12,7 @@ class SessionController < ApplicationController
             user.save
         end
         session[:user_id] = user.id
-        redirect_to root_path
+        redirect_to user_path(user)
     end
 
     def create
