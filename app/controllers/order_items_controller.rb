@@ -1,31 +1,51 @@
 class OrderItemsController < ApplicationController
 
     def create
-        byebug
+    byebug
         @order = current_order
-        @order.user ||= current_user
-		@order_item = @order.order_items.new(order_item_params)
-        if @order.save
-            flash[:message] = 'Item added to cart'
+        byebug
+        orderitem = @order.order_items.find_by(item_id: params[:order_item][:item_id])
+        if orderitem
+            orderitem[:quantity] = orderitem.quantity.to_i + params[:order_item][:quantity].to_i
+            orderitem.save
+        else
+            @item = @order.order_items.new(order_item_params)
+            @order.user = current_user
         end
-        render 'items/index'
-            		session[:order_id] = @order.id
+        @order.save
+        flash[:success] = "Item added to your order #{current_order.id}!!"
+        session[:order_id] = @order.id
+        redirect_to items_path
 	end
 
-    def update
-    byebug    
+    def update   
+        byebug
 		@order = current_order
 		@order_item = @order.order_items.find(params[:id])
 		@order_item.update_attributes(order_item_params)
-        @order_items = @order.order_items
-        render "orders/show"
+        # @order_items = @order.order_items
+        flash[:success] = "Quantity of #{@order_item.item.name} updated!"
+        redirect_to order_path(@order)
 	end
 
-	def destroy
+    def destroy
+        byebug
 		@order = current_order
-		@order_item = @order.order_items.find(params[:id])
-		@order_item.destroy
-		@order_items = @order.order_items
+		@item = @order.order_items.find(params[:id])
+        @item.destroy
+        byebug
+        if @order.order_items.size == 0
+            @order.destroy
+            session[:order_id]= nil
+            flash[:success] = "Item deleted and empty order removed!"
+            redirect_to root_path
+        else
+           @order.save
+           flash[:success] = "Item deleted!"
+           redirect_to order_path(current_order)
+        end
+        
+		
 	end
 
 	private

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+    helper ApplicationHelper
     helper_method :current_user, :logged_in?
 
     def current_user
@@ -14,7 +15,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_order
-		if !session[:order_id].nil?
+		if session[:order_id]
 			Order.find(session[:order_id])
 		else
 			Order.new

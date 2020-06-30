@@ -7,10 +7,8 @@ class UsersController < ApplicationController
 
     def create
         user = User.find_or_create_by(username: user_params[:username])
-        byebug
         if user
             user.update(user_params)
-            byebug
             user.save
             redirect_to root_path
         else
@@ -21,6 +19,11 @@ class UsersController < ApplicationController
     def show
         @user = User.find_by_id(params[:id])
         redirect_to root_path if !@user
+    end
+
+    def order_index
+        @orders = current_user.orders
+        render template: 'orders/index'
     end
     
 

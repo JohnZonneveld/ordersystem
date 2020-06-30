@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :users
   resources :order_items
 
+  get 'users/:id/orders', to: 'users#order_index'
+
   get '/login', to: 'session#new'
   post '/login', to: 'session#create'
 

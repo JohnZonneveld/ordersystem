@@ -4,8 +4,10 @@ class OrdersController < ApplicationController
     end
 
     def show
+        order = Order.find(params[:id])
+        @order_items = order.order_items
         byebug
-        @order_items = Order.find(params[:id]).order_items
+        session[:order_id] = order.id
     end
 
     def create
@@ -20,7 +22,7 @@ class OrdersController < ApplicationController
     end
     
 
-    def new
-        @order = Order.new
-    end
+    # def new
+    #     @order = Order.new
+    # end
 end
