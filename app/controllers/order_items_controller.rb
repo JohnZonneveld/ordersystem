@@ -31,8 +31,8 @@ class OrderItemsController < ApplicationController
     def destroy
         byebug
 		@order = current_order
-		@item = @order.order_items.find(params[:id])
-        @item.destroy
+		@orderitem = @order.order_items.find(params[:id])
+        @orderitem.destroy
         byebug
         if @order.order_items.size == 0
             @order.destroy
@@ -41,7 +41,7 @@ class OrderItemsController < ApplicationController
             redirect_to root_path
         else
            @order.save
-           flash[:success] = "Item deleted!"
+           flash[:success] = "Item: '#{@orderitem.item.name}' deleted from your order!"
            redirect_to order_path(current_order)
         end
         
