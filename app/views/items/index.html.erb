@@ -1,5 +1,47 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <% @items.each do |item| %>
+        <th scope="row"></th>
+            <td><%= item.name %></td>
+            <td><%= item.description %></td>
+            <td><%= item.price %></td>
+            <td><%= button_to  "add to order", orders_path %>
+        </tr>
+
+        <% end %>
+    </tbody>
+</table>
+
+<h1>Products for sale</h1>
+
 <% @items.each do |item| %>
-    <%= item.name %>
-    <%= item.description %>
-    <%= item.price %>
+	<div class="well">
+		<div class="row">
+			<div class="col-sm-8">
+				<h3><%= item.name %></h3>
+			</div>
+			<div class="col-sm-4">
+				<div class="pull-right">
+				<%= form_for(@order_item, remote: true) do |f| %>
+					<%= f.hidden_field :item_id, value: item.id %>
+					<h5><%= item.price %></h5>
+					<div class="form-group">
+						<%= f.text_field :quantity, value: 1, min: 1, class: 'form-control' %>
+					</div>
+					<%= f.submit "Add to cart", class: 'btn btn-primary btn-sm' %>
+				<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
 <% end %>

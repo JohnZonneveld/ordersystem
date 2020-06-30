@@ -1,1 +1,50 @@
-Order num
+<% if !@order_item.nil? && @order_item.errors.any? %>
+	<ul>
+		<% @order_item.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+<% end %>
+<table class="table">
+<% if @order_items.size>0 %>
+	<% @order_items.each do |oitem| %>
+    <tr>
+		<div class="well">
+			<div class="row">
+				<div class="col-sm-8">
+                <td>
+					<h5><%= oitem.item.name %></h5>
+                </td>
+				</div>
+				<div class="col-sm-4">
+					<div class="pull-right">
+		                <%= form_for(oitem, remote: true) do |f| %>
+					    <%= f.hidden_field :item_id, value: oitem.item.id %>
+                        <td>
+					    <h5><%= oitem.item.price %></h5>
+                        </td>
+                        <td>
+					    <div class="form-group">
+						    <%= f.text_field :quantity, value: oitem.quantity, min: 1, class: 'form-control' %>
+					    </div>
+                        </td>
+                        <td>
+                        <div class="btn-group">
+					    <%= f.submit "Update", class: 'btn btn-primary btn-sm' %>
+                        <%= link_to "Delete", oitem, method: :delete, remote: true, class: 'btn btn-danger'  %>
+                        </td>
+                        </div>
+                        <td>
+             
+                        <span>Total Price: <%= oitem.item.price * oitem.quantity %></span>
+                        </td>
+				<% end %>
+				</div>
+
+			</div>
+		</div>
+		</div>
+	<% end %>
+<% else %>
+	
+<% end %>

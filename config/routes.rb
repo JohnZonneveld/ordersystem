@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :items
   resources :orders
   resources :users
+  resources :order_items
 
   get '/login', to: 'session#new'
   post '/login', to: 'session#create'

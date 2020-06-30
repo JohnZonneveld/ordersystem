@@ -12,4 +12,12 @@ class ApplicationController < ActionController::Base
     def redirect_not_logged_in
         redirect_to root_path if !logged_in?
     end
+
+    def current_order
+		if !session[:order_id].nil?
+			Order.find(session[:order_id])
+		else
+			Order.new
+		end
+	end
 end
