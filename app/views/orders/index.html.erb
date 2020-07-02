@@ -6,7 +6,7 @@
     <thead>
         <tr>
             <th scope="col">Order #</th>
-            <th scope="col">Desription</th>
+            <th scope="col">Ordered by</th>
             <th scope="col">Status</th>
             <th scope="col">Submitted</th>
             <th scope="col">Order total</th>
@@ -16,11 +16,11 @@
         <%@orders.each do |order| %>
             <tr>
                 <th scope="row"><%= order.id%></th>
-                <td><%= order.description %></td>
+                <td><%= order.user.name %></td>
                 <td><%= order.approved ? 'Approved' : 'Pending' %></td>
                 <td><%= order.created_at %></td>
                 <td><%= '%.2f' % order.total_price %>
-                <td><%= link_to  "details", order_path(order) %>
+                <td><%= link_to  "order details", order_path(order) %>
             </tr>
         <% end %>
     </tbody>

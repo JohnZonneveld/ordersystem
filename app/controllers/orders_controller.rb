@@ -54,4 +54,16 @@ class OrdersController < ApplicationController
 		session[:order_id] = @order.id
 	end
 
+	def destroy
+		@order = Order.find(params[:id])
+		if @order.destroy
+			flash[:success] = 'Order was successfully deleted.'
+			redirect_to orders_url
+		else
+			flash[:error] = 'Something went wrong'
+			redirect_to orders_url
+		end
+	end
+	
+
 end

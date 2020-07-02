@@ -14,7 +14,7 @@ class OrderItemsController < ApplicationController
                 session[:order_id] = @order.id
             end
             @order.save
-            flash[:success] = "Item added to your order #{current_order.id}!!"
+            flash[:success] = "Item added to your order #{@order.id}!!"
         else
             flash[:error] = "You need to be logged in to add items to order"
         end
