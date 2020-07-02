@@ -25,6 +25,11 @@ class UsersController < ApplicationController
         @orders = current_user.orders
         render template: 'orders/index'
     end
+
+    def index
+        @users = User.all
+        @order = Order.pending
+    end
     
 
     private

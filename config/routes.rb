@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :orders
   resources :users
   resources :order_items
+  resources :users,only: [:show] do
+    resources :orders, only:[:show, :edit, :index, :new]
+  end
 
   get 'users/:id/orders', to: 'users#order_index'
 

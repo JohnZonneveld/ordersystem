@@ -1,0 +1,48 @@
+<p></p>
+<% if !@order_item.nil? && @order_item.errors.any? %>
+	<ul>
+		<% @order_item.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<p>Order no.: <%= @order.id %>,  status: <%= @order.approved ? 'Approved' : 'Pending' %></p>
+<p><h3>Order total: $<%= '%.2f' % @order.total_price %></h3></p>
+<% if @order.order_items.size>0 %>
+	<% @order.order_items.each do |oitem| %>
+        <div class="row">
+        <div class="col-sm-2">
+		    <h5><%= oitem.item.name %></h5>
+        </div>
+        <div class="col-md-8">
+            <%= form_for(oitem, remote: true) do |f| %>
+            <div class="row">
+		        <%= f.hidden_field :item_id, value: oitem.item.id %>
+                <div class="col">                
+			    <h5><%= '%.2f' % oitem.item.price %></h5>
+                </div>
+                <div class="col">
+                <%= f.text_field :quantity, value: oitem.quantity, min: 1 %>
+                </div>
+	            <div class="btn-group">
+                <div class="col">
+                    <%= f.submit "Update", class: 'btn btn-primary btn-sm' %>
+                </div>
+                <div class="col">
+                    <%= link_to "Delete", oitem, method: :delete, remote: true, class: 'btn btn-danger btn-sm'  %>
+                </div>
+                </div>
+                <div class="col">
+                <span>Total Price: <%=  '%.2f' % (oitem.item.price * oitem.quantity) %></span>
+                </div>
+		    <% end %>	
+            </div>
+        </div>	
+		</div>
+        <br>
+	<% end %>
+<% else %>
+	
+<% end %>
+</div>

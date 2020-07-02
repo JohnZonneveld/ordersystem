@@ -1,10 +1,15 @@
+<% if current_user.admin && @user%>
+    <p>Order(s) in name of: <%= @user.name %></p>
+    <p><%= link_to  " Create new order", new_user_order_path %></p>
+<% end %>
 <table class="table">
     <thead>
         <tr>
             <th scope="col">Order #</th>
             <th scope="col">Desription</th>
-            <th scope="col">status</th>
-            <th scope="col">submitted</th>
+            <th scope="col">Status</th>
+            <th scope="col">Submitted</th>
+            <th scope="col">Order total</th>
         </tr>
     </thead>
     <tbody>
@@ -12,8 +17,9 @@
             <tr>
                 <th scope="row"><%= order.id%></th>
                 <td><%= order.description %></td>
-                <td><%= order.approved %></td>
+                <td><%= order.approved ? 'Approved' : 'Pending' %></td>
                 <td><%= order.created_at %></td>
+                <td><%= '%.2f' % order.total_price %>
                 <td><%= link_to  "details", order_path(order) %>
             </tr>
         <% end %>
