@@ -3,18 +3,22 @@ class OrderItemsController < ApplicationController
     def create
         @order = current_order
         if logged_in?
-            orderitem = @order.order_items.find_by(item_id: params[:order_item][:item_id])
-            # if orderitem already exists in order add quantities together, else create new orderitem
-            if orderitem
-                orderitem[:quantity] = orderitem.quantity.to_i + params[:order_item][:quantity].to_i
-                orderitem.save
+            if !@order.approved
+                orderitem = @order.order_items.find_by(item_id: params[:order_item][:item_id])
+                # if orderitem already exists in order add quantities together, else create new orderitem
+                if orderitem
+                    orderitem[:quantity] = orderitem.quantity.to_i + params[:order_item][:quantity].to_i
+                    orderitem.save
+                else
+                    @item = @order.order_items.new(order_item_params)
+                    @order.user ||= current_user
+                    session[:order_id] = @order.id
+                end
+                @order.save
+                flash[:success] = "Item added to your order #{@order.id}!!"
             else
-                @item = @order.order_items.new(order_item_params)
-                @order.user ||= current_user
-                session[:order_id] = @order.id
+                flash[:alert] = "Order already approved. You will not be able to add items"
             end
-            @order.save
-            flash[:success] = "Item added to your order #{@order.id}!!"
         else
             flash[:error] = "You need to be logged in to add items to order"
         end

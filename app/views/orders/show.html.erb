@@ -1,12 +1,12 @@
 <%= render :partial => 'order_header' %>
-<% if !current_user.admin %>
-    <%= link_to  "Edit this order", edit_order_path(@order) %>
-<% else %>
-    Order in name of: <%= @order.user.name %>
-    <% if !@order.approved %>
-        <%= link_to  "approve this order", order_path, method: :patch, class: "text-white bg-success"   %>
-        <%= link_to  "delete this order", order_path, method: :delete, class: "text-white bg-danger" %>
+<% if !@order.approved %>
+    <% if current_user.admin %>
+        Order in name of: <%= @order.user.name %>&emsp;
+        <span><%= link_to  "Approve this order", order_path, method: :patch, class: "text-white bg-success" %></span>  
+    <% else %>
+        <span><%= link_to  "Edit this order", edit_order_path(@order), class: "text-white bg-primary" %></span>
     <% end %>
+    <span><%= link_to  "Delete this order", order_path, method: :delete, class: "text-white bg-danger" %></span>
 <% end %>
 
 <table class="table">
@@ -23,8 +23,8 @@
             <tr>
                 <th scope="row"><%= oi.item.name %></th>
                 <td><%= oi.quantity %></td>
-                <td><%= oi.item.price %></td>
-                <td><%= '%.2f' % (oi.item.price * oi.quantity) %></td>
+                <td><%= number_to_currency(oi.item.price) %></td>
+                <td><%= number_to_currency(oi.item.price * oi.quantity) %></td>
                 <td></td>
             </tr>
         <% end %>

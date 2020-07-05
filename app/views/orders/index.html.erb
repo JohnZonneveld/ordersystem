@@ -21,8 +21,8 @@
                 <td><%= order.user.name %></td>
                 <td><%= order.approved ? 'Approved' : 'Pending' %></td>
                 <td><%= order.created_at %></td>
-                <td><%= '%.2f' % order.total_price %>
-                <td><%= link_to  "order details", order_path(order) %>
+                <td><%= number_to_currency(order.total_price) %>
+                <td><%= link_to  "_order details_", order_path(order), class: "text-white bg-primary"%>
             </tr>
         <% end %>
     </tbody>
