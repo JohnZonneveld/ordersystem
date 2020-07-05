@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
     end
 
     def show
-		@order = Order.find(params[:id])
+		@order = Order.find_by(id: params[:id])
 		if logged_in? && (current_user.orders.include?(@order)  || current_user.admin)
 			session[:order_id] = @order.id
 			render 'show'
@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
 	end
 	
 	def edit
-		@order = Order.find(params[:id])
+		@order = Order.find_by(id: params[:id])
 		if logged_in? && current_user.orders.include?(@order)
 			@order_items_size = @order.order_items.size
 			@order_items = @order.order_items
@@ -49,11 +49,19 @@ class OrdersController < ApplicationController
 	end
 
 	def new
-		@order = Order.new
-		@order.user = User.find(params[:user_id])
-		@order.save
-		# current_order
-		session[:order_id] = @order.id
+		byebug
+		if logged_in?
+			@order = Order.new
+			if params[:user_id] != nil
+				@order.user = User.find_by(id: params[:user_id])
+				@order.save
+				session[:order_id] = @order.id
+			end
+			flash[:success] = "Order #{@order.id} created"
+			redirect_to items_path
+		else
+			flash[:alert] = "You need to be signed in to add a new order"
+		end
 	end
 
 	def destroy

@@ -1,8 +1,8 @@
 class OrderItemsController < ApplicationController
 
     def create
+        @order = current_order
         if logged_in?
-            @order = current_order
             orderitem = @order.order_items.find_by(item_id: params[:order_item][:item_id])
             # if orderitem already exists in order add quantities together, else create new orderitem
             if orderitem

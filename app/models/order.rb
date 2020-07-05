@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-    has_many :order_items
+    has_many :order_items, :dependent => :delete_all
     has_many :items, through: :order_items
     belongs_to :user
     before_save :set_total_price
@@ -15,6 +15,4 @@ class Order < ApplicationRecord
 			self[:total_price] = total
         end
         
-        
-
 end
