@@ -1,0 +1,3 @@
+<p></p>
+<p>Order no.: <%= @order.id %>,  status: <%= @order.approved ? 'Approved' : 'Pending' %></p>
+<p><h3>Order total: $<%= '%.2f' % @order.total_price %></h3></p>

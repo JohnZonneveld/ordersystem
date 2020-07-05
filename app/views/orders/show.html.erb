@@ -1,6 +1,4 @@
-<p>Order no.: <%= @order.id %>,  status: <%= @order.approved ? 'Approved' : 'Pending' %></p>
-
-<p><h3>Order total: $<%= '%.2f' % @order.total_price %></h3></p>
+<%= render :partial => 'order_header' %>
 <% if !current_user.admin %>
     <%= link_to  "Edit this order", edit_order_path(@order) %>
 <% else %>

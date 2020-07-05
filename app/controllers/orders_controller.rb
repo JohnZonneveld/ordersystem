@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 				@user=User.find(params[:user_id])
 				@orders = @user.orders.pending.order("created_at DESC")
 			else
-				@orders = Order.all
+				@orders = Order.all.order("created_at DESC")
 			end
 		else
 			@orders = current_user.orders.order("created_at DESC")

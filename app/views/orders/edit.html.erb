@@ -1,4 +1,3 @@
-<p></p>
 <% if !@order_item.nil? && @order_item.errors.any? %>
 	<ul>
 		<% @order_item.errors.full_messages.each do |msg| %>
@@ -7,21 +6,20 @@
 	</ul>
 <% end %>
 
-<p>Order no.: <%= @order.id %>,  status: <%= @order.approved ? 'Approved' : 'Pending' %></p>
-<p><h3>Order total: $<%= '%.2f' % @order.total_price %></h3></p>
-<%byebug%>
+<%= render :partial => 'order_header' %>
+
 <% if @order_items_size>0 %>
 	<% @order_items.each do |oitem| %>
         <div class="row">
         <div class="col-sm-2">
-		    <h5><%= oitem.item.name %></h5>
+		    <strong><%= oitem.item.name %></strong>
         </div>
         <div class="col-md-8">
             <%= form_for(oitem, remote: true) do |f| %>
             <div class="row">
 		        <%= f.hidden_field :item_id, value: oitem.item.id %>
                 <div class="col">                
-			    <h5><%= '%.2f' % oitem.item.price %></h5>
+			    <%= '%.2f' % oitem.item.price %>
                 </div>
                 <div class="col">
                 <%= f.text_field :quantity, value: oitem.quantity, min: 1 %>
@@ -44,6 +42,6 @@
         <br>
 	<% end %>
 <% else %>
-	
+    <h5>This order has no items added yet!</h5>
 <% end %>
 </div>

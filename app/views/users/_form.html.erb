@@ -17,10 +17,10 @@
         <%= f.email_field :email %>
     </p>
     <% if current_user.admin %>
-    <p>
-        <%= f.label :admin %>
-        <%= f.check_box :admin %>
-    </p>
+        <p>
+            <%= f.label :admin %>
+            <%= f.check_box :admin %>
+        </p>
     <% end %>
     <%= f.submit %>
 <% end %>

@@ -1,4 +1,3 @@
-<table>
 <table class="table">
     <thead>
         <tr>
@@ -14,12 +13,13 @@
                 <th scope="row"><%= user.name %></th>
                 <th scope="row"><%= user.username %></th>
                 <th scope="row"><%= user.email %></th>
-                <td><% if user.admin %>
-                    (admin)
+                <td>
+                    <% if user.admin %>
+                        (admin)
                     <% else %>
-                        <%= link_to  "Orders", user_orders_path(user) %></td>
+                        <%= link_to  "Orders", user_orders_path(user) %>
                     <% end %>
-                <td></td>
+                </td>
             </tr>
         <% end %>
     </tbody>
