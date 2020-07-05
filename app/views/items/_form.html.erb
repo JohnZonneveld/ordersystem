@@ -1,0 +1,11 @@
+<%= form_for(@item) do |f| %>
+    <p><%= f.label :name %><br>
+    <%= f.text_field :name %></p>
+    <p><%= f.label :description %><br>
+    <%= f.text_area :description %></p>
+    <p><%= f.label :price %><br>
+    <%= f.text_field :price %></p>
+    <p><%= f.label :available %>
+    <%= f.check_box :available %></p>
+    <%= f.submit %>
+<% end %>

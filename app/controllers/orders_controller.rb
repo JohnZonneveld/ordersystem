@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 	def index
-		if current_user.admin
+		if admin
 			if params[:user_id]
 				@user=User.find(params[:user_id])
 				@orders = @user.orders.pending.order("created_at DESC")
@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
 
     def show
 		@order = Order.find_by(id: params[:id])
-		if logged_in? && (current_user.orders.include?(@order)  || current_user.admin)
+		if logged_in? && (current_user.orders.include?(@order)  || admin)
 			session[:order_id] = @order.id
 			render 'show'
 		else

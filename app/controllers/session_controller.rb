@@ -21,7 +21,7 @@ class SessionController < ApplicationController
             session[:user_id] = user.id
             redirect_to user_path(user)
         else
-            flash[:message] = "username/password didn't match our records"
+            flash[:message] = "username/password combination didn't match our records"
             redirect_to login_path
         end
     end

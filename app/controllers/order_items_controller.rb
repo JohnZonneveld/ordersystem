@@ -15,7 +15,7 @@ class OrderItemsController < ApplicationController
                     session[:order_id] = @order.id
                 end
                 @order.save
-                flash[:success] = "Item added to your order #{@order.id}!!"
+                flash[:success] = "#{orderitem.item.name} added to your order #{@order.id}!!"
             else
                 flash[:alert] = "Order already approved. You will not be able to add items"
             end

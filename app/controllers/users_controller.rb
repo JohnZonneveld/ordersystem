@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     end
 
     def edit
-        if current_user.admin
+        if admin
             @user = User.find(params[:id])
         else
             @user = User.find(params[:id])

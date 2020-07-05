@@ -1,4 +1,4 @@
-<% if current_user.admin && @user %>
+<% if admin && @user %>
     <p>Order(s) in name of: <%= @user.name %></p>
     <p><%= link_to  " Create new order", new_user_order_path %></p>
 <% else %>
@@ -22,7 +22,7 @@
                 <td><%= order.approved ? 'Approved' : 'Pending' %></td>
                 <td><%= order.created_at %></td>
                 <td><%= number_to_currency(order.total_price) %>
-                <td><%= link_to  "_order details_", order_path(order), class: "text-white bg-primary"%>
+                <td><%= link_to  "order details", order_path(order), class: "btn btn-primary btn-sm" %>
             </tr>
         <% end %>
     </tbody>
