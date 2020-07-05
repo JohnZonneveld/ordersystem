@@ -1,51 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Ordersystem</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<head>
+		<title>Ordersystem</title>
+			<%= csrf_meta_tags %>
+			<%= csp_meta_tag %>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <a class="navbar-brand" href="/"><%= image_tag "VB-Logo.png" %></a>
-    <% if logged_in? %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" <%= link_to  "Home", root_path %> <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" <%= link_to  "Orders", orders_path %></a>
-          <% if current_user.admin %>
-          <a class="nav-item nav-link" <%= link_to  "Users", users_path %></a>
-          <% end %>
-          <a class="nav-item nav-link" <%= link_to  "Items", items_path %></a>
-          <a class="nav-item nav-link" <%= link_to  "Log Out", logout_path, method: "delete" %></a>
-        </div>
-      </div>
-    <% else %>
-      <form class="form-inline">
-      <a class="btn btn-outline-primary" href="/login" role="button">
-      Login
-      </a>
-      <div style="padding-left: 10px;">
-      <a class="btn btn-outline-success" href="/users/new" role="button">
-      Sign Up
-      </a>
-    </div>
-  </form>
-    <% end %>
-  </nav>
+			<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+			<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	</head>
+	<nav class="navbar navbar-expand-md navbar-light bg-light">
+		<a class="navbar-brand" href="/"><%= image_tag "VB-Logo.png" %></a>
+		<% if logged_in? %>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link active" <%= link_to  "Home", root_path %> <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link" <%= link_to  "Orders", orders_path %></a>
+					<% if current_user.admin %>
+						<a class="nav-item nav-link" <%= link_to  "Users", users_path %></a>
+					<% end %>
+					<a class="nav-item nav-link" <%= link_to  "Items", items_path %></a>
+					<a class="nav-item nav-link" <%= link_to  "Log Out", logout_path, method: "delete" %></a>
+				</div>
+			</div>
+		<% else %>
+	    	<form class="form-inline">
+    			<a class="btn btn-outline-primary" href="/login" role="button">Login</a>
+				<div style="padding-left: 10px;">
+		    		<a class="btn btn-outline-success" href="/users/new" role="button">Sign Up</a>
+				</div>
+			</form>
+		<% end %>
+	</nav>
 
-  <body>
-    <div class="container">
+	<body>
+	    <div class="container">
+			<%= flash_messages %>
 
-      <%= flash_messages %>
+			<%= yield %>
 
-      <%= yield %>
-    </div>
-  </body>
+		</div>
+	</body>
 </html>
