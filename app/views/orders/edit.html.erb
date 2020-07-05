@@ -9,8 +9,9 @@
 
 <p>Order no.: <%= @order.id %>,  status: <%= @order.approved ? 'Approved' : 'Pending' %></p>
 <p><h3>Order total: $<%= '%.2f' % @order.total_price %></h3></p>
-<% if @order.order_items.size>0 %>
-	<% @order.order_items.each do |oitem| %>
+<%byebug%>
+<% if @order_items_size>0 %>
+	<% @order_items.each do |oitem| %>
         <div class="row">
         <div class="col-sm-2">
 		    <h5><%= oitem.item.name %></h5>

@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 		if current_user.admin
 			if params[:user_id]
 				@user=User.find(params[:user_id])
-				@orders = @user.orders.pending
+				@orders = @user.orders.pending.order("created_at DESC")
 			else
 				@orders = Order.all
 			end
@@ -39,6 +39,8 @@ class OrdersController < ApplicationController
 	def edit
 		@order = Order.find(params[:id])
 		if logged_in? && current_user.orders.include?(@order)
+			@order_items_size = @order.order_items.size
+			@order_items = @order.order_items
 			render 'edit'
 		else
 			flash[:error] = "Illegal action, you were redirect to the homepage"
