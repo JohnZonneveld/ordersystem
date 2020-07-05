@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
 				@orders = Order.all
 			end
 		else
-			@orders = current_user.orders
+			@orders = current_user.orders.order("created_at DESC")
 		end
     end
 
@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
 		@order = Order.new
 		@order.user = User.find(params[:user_id])
 		@order.save
-		current_order
+		# current_order
 		session[:order_id] = @order.id
 	end
 

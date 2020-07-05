@@ -1,18 +1,16 @@
 class UsersController < ApplicationController
-    before_action :redirect_not_logged_in, only: :show
 
     def new
         @user=User.new
     end
 
     def create
-        user = User.find_or_create_by(username: user_params[:username])
-        if user
-            user.update(user_params)
-            user.save
+            @user = User.new(user_params)
+            if @user.save
+            flash[:success] = "Account created, you can now login"
             redirect_to root_path
         else
-            render 'new'
+            redirect_to new_user_path, alert: "Username already exists!"
         end
     end
 
@@ -30,6 +28,31 @@ class UsersController < ApplicationController
         @users = User.all
         @order = Order.pending
     end
+
+    def edit
+        if current_user.admin
+            @user = User.find(params[:id])
+        else
+            @user = User.find(params[:id])
+            if @user != current_user
+                flash[:error] = "Only and admin can change other users details"
+                redirect_to user_path(current_user)
+            end
+        end
+    end
+
+    def update
+        @user = User.find(params[:id])
+        if @user.update(user_params)
+          flash[:success] = "User was successfully updated"
+          redirect_to @user
+        else
+          flash[:error] = "Something went wrong"
+          render 'edit'
+        end
+    end
+    
+    
     
 
     private

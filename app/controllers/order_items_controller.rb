@@ -25,8 +25,7 @@ class OrderItemsController < ApplicationController
         @order = current_order
         if !@order.approved
 		    @order_item = @order.order_items.find(params[:id])
-		    @order_item.update_attributes(order_item_params)
-            @order.save
+		    @order_item.update(order_item_params)
             flash[:success] = "Quantity of #{@order_item.item.name} updated!"
             redirect_to order_path(@order)
         else

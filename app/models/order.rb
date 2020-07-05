@@ -8,13 +8,18 @@ class Order < ApplicationRecord
 
     def total
         order_items.collect {|order_item| order_item.valid? ? order_item.item.price*order_item.quantity : 0}.sum
-    
+    end
+
+    def sorted_orders
+        current_user.orders.order("created_at DESC")
     end
     
 
 	private
 		def set_total_price
 			self[:total_price] = total
-		end
+        end
+        
+        
 
 end

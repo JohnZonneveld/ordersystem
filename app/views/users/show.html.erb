@@ -1,1 +1,10 @@
-<%= @user.name %> welcome to your page
+<p><%= @user.name %> welcome to your page.</p>
+
+<p>Your details:</p>
+Name: <%= @user.name %><br>
+Username: <i><%= @user.username %></i><br>
+Email: <%= @user.email %><br>
+Your role: <i><%= @user.admin ? "admin" : "user" %></i><br>
+<br>
+<%= link_to  "edit your details", edit_user_path %>
+
