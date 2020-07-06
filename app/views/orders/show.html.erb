@@ -1,6 +1,6 @@
 <%= render :partial => 'order_header' %>
 <p>
-<% if !@order.approved %>
+<% if !order_approved? %>
     <% if admin %>
         Order in name of: <%= @order.user.name %>&emsp;
         <span><%= link_to  "Approve this order", order_path, method: :patch, class: "btn btn-success btn-sm" %></span>  

@@ -26,6 +26,7 @@ class OrdersController < ApplicationController
 
 	def update
 		@order = Order.find(params[:id])
+		#only path here is 'approve order'
 		@order.approved = true
 		if @order.save
 		  flash[:success] = "Order was successfully updated"

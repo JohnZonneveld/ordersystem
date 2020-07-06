@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     helper ApplicationHelper
-    helper_method :current_user, :logged_in?, :admin
+    helper_method :current_user, :logged_in?, :admin, :order_approved?
 
     def current_user
         @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
@@ -24,5 +24,9 @@ class ApplicationController < ActionController::Base
 		else
 			Order.new
 		end
-	end
+    end
+    
+    def order_approved?
+        @order.approved
+    end
 end

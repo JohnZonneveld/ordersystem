@@ -3,7 +3,7 @@ class OrderItemsController < ApplicationController
     def create
         @order = current_order
         if logged_in?
-            if !@order.approved
+            if !order_approved?
                 orderitem = @order.order_items.find_by(item_id: params[:order_item][:item_id])
                 # if orderitem already exists in order add quantities together, else create new orderitem
                 if orderitem
@@ -27,7 +27,7 @@ class OrderItemsController < ApplicationController
 
     def update   
         @order = current_order
-        if !@order.approved
+        if !order_approved?
 		    @order_item = @order.order_items.find(params[:id])
 		    @order_item.update(order_item_params)
             flash[:success] = "Quantity of #{@order_item.item.name} updated!"
@@ -41,7 +41,7 @@ class OrderItemsController < ApplicationController
 
     def destroy
         @order = current_order
-        if !@order.approved
+        if !order_approved?
 		    @orderitem = @order.order_items.find(params[:id])
             @orderitem.destroy
             if @order.order_items.size == 0
@@ -63,6 +63,8 @@ class OrderItemsController < ApplicationController
 	private
 		def order_item_params
 			params.require(:order_item).permit(:item_id, :quantity)
-		end
+        end
+
+
 
 end
