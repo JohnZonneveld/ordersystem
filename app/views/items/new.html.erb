@@ -1,3 +1,11 @@
 <br>
+<% if !@item.nil? && @item.errors.any? %>
+	<ul>
+		<% @item.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+<% end %>
+<br>
 <h4>New Item</h4>
 <%= render 'form' %>

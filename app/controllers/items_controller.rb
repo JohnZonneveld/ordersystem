@@ -15,10 +15,10 @@ class ItemsController < ApplicationController
     end
     
     def create
-        @item = Item.new(params[:item])
+        @item = Item.new(item_params)
         if @item.save
             flash[:success] = "Item successfully created"
-            redirect_to @item
+            redirect_to items_path
         else
             flash[:error] = "Something went wrong"
             render 'new'
