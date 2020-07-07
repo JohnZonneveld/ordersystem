@@ -55,7 +55,7 @@ class OrdersController < ApplicationController
 			@order = Order.new
 			if params[:user_id] != nil
 				@order.user = User.find_by(id: params[:user_id])
-				@order.save
+				@order.save!
 				session[:order_id] = @order.id
 			end
 			flash[:success] = "Order #{@order.id} created"

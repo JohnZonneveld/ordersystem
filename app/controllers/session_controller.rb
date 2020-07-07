@@ -9,7 +9,7 @@ class SessionController < ApplicationController
         if !user.password_digest
             user.password = SecureRandom.hex
             user.name = auth.name
-            user.save
+            user.save!
         end
         session[:user_id] = user.id
         redirect_to user_path(user)

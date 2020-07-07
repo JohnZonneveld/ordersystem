@@ -8,13 +8,13 @@ class OrderItemsController < ApplicationController
                 # if orderitem already exists in order add quantities together, else create new orderitem
                 if orderitem
                     orderitem[:quantity] = orderitem.quantity.to_i + params[:order_item][:quantity].to_i
-                    orderitem.save
+                    orderitem.save!
                 else
                     @item = @order.order_items.new(order_item_params)
                     @order.user ||= current_user
                     session[:order_id] = @order.id
                 end
-                @order.save
+                @order.save!
                 flash[:success] = "#{orderitem.item.name} added to your order #{@order.id}!!"
             else
                 flash[:alert] = "Order already approved. You will not be able to add items"
@@ -50,7 +50,7 @@ class OrderItemsController < ApplicationController
                 flash[:success] = "Item deleted and empty order removed!"
                 redirect_to root_path
             else
-                @order.save
+                @order.save!
                 flash[:success] = "Item: '#{@orderitem.item.name}' deleted from your order!"
                 redirect_to order_path(current_order)
             end
@@ -64,7 +64,5 @@ class OrderItemsController < ApplicationController
 		def order_item_params
 			params.require(:order_item).permit(:item_id, :quantity)
         end
-
-
 
 end
