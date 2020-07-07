@@ -5,6 +5,7 @@ class Order < ApplicationRecord
     before_save :set_total_price
 
     scope :pending, -> { where(approved: false) }
+    
 
     def total
         order_items.collect {|order_item| order_item.valid? ? order_item.item.price*order_item.quantity : 0}.sum

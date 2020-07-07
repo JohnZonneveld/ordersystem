@@ -5,7 +5,7 @@ one:
   username: MyString
   email: MyString
   admin: false
-  pasword_digest: MyString
+  password_digest: MyString
 
 two:
   name: MyString

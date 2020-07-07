@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 		if admin
 			if params[:user_id]
 				@user=User.find(params[:user_id])
-				@orders = @user.orders.pending.order("created_at DESC")
+				@orders = @user.orders.where(approved: false).order("created_at DESC")
 			else
 				@orders = Order.all.order("created_at DESC")
 			end
