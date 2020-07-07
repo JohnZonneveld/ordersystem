@@ -50,7 +50,6 @@ class OrdersController < ApplicationController
 	end
 
 	def new
-		byebug
 		if logged_in?
 			@order = Order.new
 			if params[:user_id] != nil
