@@ -1,18 +1,5 @@
-<p><%= link_to  "Top 5, most ordered items", items_most_popular_path %></p>
-<% if session[:order_id] %>
-    You are working on: <%= link_to  "Order #{session[:order_id]}", order_path(session[:order_id]) %>
-<% end %>
-
-<p></p>
-
-<p><h4>Items available</h4></p>
-<% if admin %>
-	<%= link_to  "Add item", new_item_path %>
-<% end %>
-<p></p>
-<p></p>
-<% @items.each do |item| %>
-	<div>
+<% @popular_items_top5.each do |item| %>
+<div>
 		<div class="row">
 			<div class="col-sm-2">
 				<h5><%= item.name %></h5>
@@ -50,5 +37,4 @@
 			</div>
 		</div>
 	</div>
-    
-<% end %>
+<%end%>

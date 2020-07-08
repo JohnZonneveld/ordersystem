@@ -46,9 +46,8 @@ class ItemsController < ApplicationController
     end
     
     def most_popular_items
-        byebug
-        @popular_oi_sort_top5 = OrderItem.popular_sort.first(5)
-
+        @popular_items_top5 = OrderItem.popular_sort.first(5).map{|i| Item.find_by(id: i)}
+        @order_item = OrderItem.new
     end
 
     private
