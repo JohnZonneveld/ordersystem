@@ -1,7 +1,7 @@
 <% if admin && @user %>
     <p>Order(s) in name of: <%= @user.name %></p>
     <p><%= link_to  " Create new order", new_user_order_path %></p>
-<% else %>
+<% elsif !admin %>
     <p><%= link_to  "Create new order", new_order_path %>
 <% end %>
 <table class="table">

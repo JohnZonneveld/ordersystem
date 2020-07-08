@@ -41,6 +41,7 @@ class OrdersController < ApplicationController
 		@order = Order.find_by(id: params[:id])
 		if logged_in? && current_user.orders.include?(@order)
 			@order_items_size = @order.order_items.size
+			byebug
 			@order_items = @order.order_items
 			render 'edit'
 		else
@@ -51,13 +52,18 @@ class OrdersController < ApplicationController
 
 	def new
 		if logged_in?
+			byebug
+			session[:order_id] = nil
 			@order = Order.new
-			if params[:user_id] != nil
+			if current_user.admin
 				@order.user = User.find_by(id: params[:user_id])
 				@order.save!
 				session[:order_id] = @order.id
 			end
-			flash[:success] = "Order #{@order.id} created"
+			# 	@order.user = current_user
+			# 	@order.save!
+			# end
+			# flash[:success] = "Order #{@order.id} created"
 			redirect_to items_path
 		else
 			flash[:alert] = "You need to be signed in to add a new order"
