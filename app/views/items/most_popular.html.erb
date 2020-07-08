@@ -1,0 +1,12 @@
+Most popular items:
+<div class="row">
+	<div class="col-sm-2">
+		<h5><%= @most_popular_item.name %></h5>
+	</div>
+    <div class="col-sm-3">
+        <h6><%= @most_popular_item.description %></h6>
+    </div>
+	<div class="col-sm-2">
+        <h5><%= number_to_currency(@most_popular_item.price) %></h5>
+    </div>
+</div>

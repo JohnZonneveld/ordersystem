@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'session/home'
   root "session#home"
-  resources :items
+  resources :items, except: [:show]
   resources :orders
   resources :users
   resources :order_items
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/login', to: 'session#new'
   post '/login', to: 'session#create'
 
+  get '/items/most_popular/', to: 'items#most_popular_items'
   delete '/logout', to: 'session#destroy'
 
   # GOOGLE Login

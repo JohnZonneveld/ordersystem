@@ -4,13 +4,15 @@ class SessionController < ApplicationController
     end
     
 
-	def oauth_login
-        user = User.find_or_create_by(email: auth.email)
-        if !user.password_digest
-            user.password = SecureRandom.hex
-            user.name = auth.name
-            user.save!
+    def oauth_login
+        user = User.find_or_create_by(uid: auth['uid']) do |u|
+            u.password = SecureRandom.hex
+            u.username = auth['info']['email'].split('@').first
+            u.name = auth['info']['name']
+            u.email = auth['info']['email']
         end
+        byebug
+        # user.save
         session[:user_id] = user.id
         redirect_to user_path(user)
     end
@@ -40,7 +42,7 @@ class SessionController < ApplicationController
 	private
 
     def auth
-        request.env['omniauth.auth'].info
+        request.env['omniauth.auth']
     end
 
     def user_params

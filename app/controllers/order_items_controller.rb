@@ -9,12 +9,10 @@ class OrderItemsController < ApplicationController
                 if orderitem
                     orderitem[:quantity] = orderitem.quantity.to_i + params[:order_item][:quantity].to_i
                     orderitem.save!
-                    byebug
                     flash[:success] = "Quantity of: #{orderitem.item.name}, updated in your order #{order.id}!!"
                 else
                     oitem = order.order_items.new(order_item_params)
                     order.user ||= current_user
-                    byebug
                     flash[:success] = "Item: #{oitem.item.name}, added to your order #{order.id}!!"
                 end
                 order.save!
