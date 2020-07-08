@@ -32,7 +32,8 @@ class OrderItemsController < ApplicationController
 		    @order_item = @order.order_items.find(params[:id])
 		    @order_item.update(order_item_params)
             flash[:success] = "Quantity of #{@order_item.item.name} updated!"
-            redirect_to order_path(@order)
+            @order.save
+            redirect_to edit_order_path(@order)
         else
             flash[:alert] = "Order has been approved and can not be changed!"
             redirect_to order_path(current_order)
