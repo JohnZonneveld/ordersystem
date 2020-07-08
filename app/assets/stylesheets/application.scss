@@ -12,7 +12,15 @@
  *
  */
  @import "bootstrap";
+ @import "rails_bootstrap_forms";
+
+ .field-with-errors {
+    padding: 2px;
+    background-color: red;
+    display: table;
+  }
 
  body { 
     background-image: image-url('background.jpg');
   }
+

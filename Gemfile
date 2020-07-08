@@ -33,6 +33,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 
 gem 'bootstrap', '~> 4.3.1'
+gem "bootstrap_form", "~> 4.0"
 gem 'jquery-rails'
 
 gem 'erd'

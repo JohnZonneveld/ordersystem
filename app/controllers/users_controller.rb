@@ -7,10 +7,11 @@ class UsersController < ApplicationController
     def create
             @user = User.new(user_params)
             if @user.save
-            flash[:success] = "Account created, you can now login"
-            redirect_to root_path
+            # flash[:success] = "Account created, you can now login"
+            # redirect_to root_path
         else
-            redirect_to new_user_path, alert: "Username already exists!"
+            # flash[:alert] = "Username already exists!"
+            render 'new'
         end
     end
 

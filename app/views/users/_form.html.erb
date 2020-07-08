@@ -1,25 +1,35 @@
 <p></p>
-<%byebug%>
-<%= form_for( @user , remote: true) do |f| %>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h3>
+      <%= pluralize(@user.errors.count, "error") %>
+      prohibited this user from being saved:
+    </h3>
+ 
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<p></p>
+
+<%= bootstrap_form_for(@user) do |f| %>
     <p>
-        <%= f.label :name %>
         <%= f.text_field :name %>
     </p>
     <p>
-        <%= f.label :username %>
         <%= f.text_field :username %>
     </p>
     <p>
-        <%= f.label :password %>
         <%= f.password_field :password %>
     </p>
     <p>
-        <%= f.label :email %>
         <%= f.email_field :email %>
     </p>
     <% if (!current_user || current_user.admin) %>
         <p>
-            <%= f.label :admin %>
             <%= f.check_box :admin %>
         </p>
     <% end %>
