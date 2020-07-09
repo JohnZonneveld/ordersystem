@@ -41,7 +41,6 @@ class OrdersController < ApplicationController
 		@order = Order.find_by(id: params[:id])
 		if logged_in? && current_user.orders.include?(@order)
 			@order_items_size = @order.order_items.size
-			byebug
 			@order_items = @order.order_items.sort {|a, b| a.item.name <=> b.item.name}
 			render 'edit'
 		else
@@ -52,7 +51,6 @@ class OrdersController < ApplicationController
 
 	def new
 		if logged_in?
-			byebug
 			session[:order_id] = nil
 			@order = Order.new
 			if current_user.admin
