@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
 		if logged_in? && current_user.orders.include?(@order)
 			@order_items_size = @order.order_items.size
 			byebug
-			@order_items = @order.order_items
+			@order_items = @order.order_items.sort {|a, b| a.item.name <=> b.item.name}
 			render 'edit'
 		else
 			flash[:error] = "Illegal action, you were redirect to the homepage"
