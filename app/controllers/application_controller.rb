@@ -14,10 +14,6 @@ class ApplicationController < ActionController::Base
         !!session[:user_id]
     end
 
-    # def redirect_not_logged_in
-    #     redirect_to root_path if !logged_in?
-    # end
-
     def current_order
 		if !session[:order_id].nil?
 			Order.find(session[:order_id])

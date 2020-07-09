@@ -58,10 +58,6 @@ class OrdersController < ApplicationController
 				@order.save!
 				session[:order_id] = @order.id
 			end
-			# 	@order.user = current_user
-			# 	@order.save!
-			# end
-			# flash[:success] = "Order #{@order.id} created"
 			redirect_to items_path
 		else
 			flash[:alert] = "You need to be signed in to add a new order"
