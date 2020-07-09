@@ -14,7 +14,7 @@
  @import "bootstrap";
  @import "rails_bootstrap_forms";
 
- .field-with-errors {
+  .field-with-errors {
     padding: 2px;
     background-color: red;
     display: table;
@@ -22,5 +22,17 @@
 
  body { 
     background-image: image-url('background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
+  // .container-bg {
+  //   background: white;
+  //   opacity: 0.9;
+  // }
+
+  .container {
+    background: white;
+    opacity: 0.9;
+    width: 80%;
+  }
