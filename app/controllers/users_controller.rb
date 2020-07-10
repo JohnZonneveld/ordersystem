@@ -10,7 +10,7 @@ class UsersController < ApplicationController
             flash[:success] = "Account created, you can now login"
             redirect_to root_path
         else
-            flash[:alert] = "Username already exists!"
+            flash[:alert] = "Something wasn't quite right!"
             render 'new'
         end
     end

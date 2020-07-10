@@ -28,7 +28,7 @@
     <p>
         <%= f.email_field :email %>
     </p>
-    <% if (!current_user || current_user.admin) %>
+    <% if (current_user && current_user.admin) %>
         <p>
             <%= f.check_box :admin %>
         </p>
