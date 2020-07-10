@@ -16,7 +16,8 @@
                 <th scope="row"><%= user.email %></th>
                 <th>
                     <% if current_user.admin %>
-                        <%= link_to  "Edit user profile", edit_user_path(user) %>
+                        <%= link_to  "Edit user profile", edit_user_path(user), class: "btn btn-success btn-sm" %>
+                        <%= link_to  "Delete this user", user_path(user), method: :delete, class: "btn btn-danger btn-sm" %>
                     <%end%>
                 </th>
                 <td>

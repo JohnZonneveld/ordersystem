@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
 
-  get 'session/home'
+  # get 'session/home'
   root "session#home"
   resources :items, except: [:show]
-  resources :orders
+  get '/items/most_popular/', to: 'items#most_popular_items'
+
+  resources :orders, only: [:show, :new, :index]
   resources :users
-  resources :order_items
+  resources :order_items, only: [:index, :create]
   resources :users,only: [:show] do
-    resources :orders, only:[:show, :edit, :index, :new]
+    resources :orders, only:[:new, :show, :index]
   end
 
   get 'users/:id/orders', to: 'users#order_index'
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
   get '/login', to: 'session#new'
   post '/login', to: 'session#create'
 
-  get '/items/most_popular/', to: 'items#most_popular_items'
+  
   delete '/logout', to: 'session#destroy'
 
   # GOOGLE Login
