@@ -5,8 +5,9 @@
         Order in name of: <%= @order.user.name %>&emsp;
         <span><%= link_to  "Approve this order", order_path, method: :patch, class: "btn btn-success btn-sm" %></span>  
     <% else %>
-        <span><%= link_to  "Edit this order", edit_order_path(@order), class: "btn btn-primary btn-sm" %></span>
+        <span><%= link_to  "Edit this order", edit_order_path(@order), class: "btn btn-primary btn-sm" %></span> 
     <% end %>
+    
     <span><%= link_to  "Delete this order", order_path, method: :delete, class: "btn btn-danger btn-sm" %></span>
 <% end %>
 </p>
