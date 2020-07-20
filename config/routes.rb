@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :items, except: [:show]
   get '/items/most_popular/', to: 'items#most_popular_items'
 
-  resources :orders
+  resources :orders, except: [:new]
   resources :users
   resources :order_items
   resources :users,only: [:show] do

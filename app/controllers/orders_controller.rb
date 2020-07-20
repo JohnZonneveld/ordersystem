@@ -50,6 +50,11 @@ class OrdersController < ApplicationController
 	end
 
 	def new
+		create
+	end
+	
+
+	def create
 		if logged_in?
 			session[:order_id] = nil
 			@order = Order.new
