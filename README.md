@@ -16,6 +16,6 @@
  Open the URL in a browser and run the application<br>
  http://localhost:3000
  
- App uses postgresql, rails 5.2.3
+ App uses postgresql, rails 5.2.4.3
 
  License: https://opensource.org/licenses/MIT
