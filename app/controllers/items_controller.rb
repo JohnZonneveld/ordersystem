@@ -1,7 +1,11 @@
 class ItemsController < ApplicationController
 
     def index
-        @items = Item.all.order(:name)
+        if !params[:search]
+            @items = Item.all.order(:name)
+        else 
+            @items = Item.where("lower(name) LIKE ?",  "%" + params[:search].downcase + "%")
+        end
         @order_item = current_order.order_items.new
     end
 
